@@ -1,0 +1,40 @@
+.ionic_datepicker_modal_content {
+  ion-row {
+    padding: 4px;
+  }
+  ion-col {
+    text-align: center;
+    margin: auto;
+  }
+  .font_bold {
+    font-weight: bold;
+  } 
+  .label-md{
+    display: none;
+  }
+  ion-select{
+    max-width: 100%;
+    width: 100%;
+  }
+  .select-md {
+    padding: 5px;
+  }
+  .date_cell{
+    padding: 5px;
+  }
+  .disabled{
+    pointer-events: none;
+    color: #aaa;
+  }
+  .today{
+    border: 1px solid #387ef5;
+    border-radius: 2px;
+    color: #000;
+  }
+  .selected_date{
+    color: #fff;
+    font-weight: bold;
+    border-radius: 2px;
+    background-color: #387ef5;
+  }
+}
