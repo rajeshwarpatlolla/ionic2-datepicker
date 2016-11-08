@@ -2,7 +2,7 @@
 	<ion-toolbar>
 		<ion-title>
 			<!-- <span [innerHTML]="selectedDate"></span> -->
-			{{ selectedDate | date:"MMM-dd-yyyy" }}
+			{{ selectedDate | date: config.dateFormat }}
 		</ion-title>
 	</ion-toolbar>
 </ion-header>
@@ -23,7 +23,7 @@
 							<ion-item>
 								<ion-label>Month</ion-label>
 								<ion-select [(ngModel)]="selectedMonth" (ionChange)="monthSelected($event,selectedMonth)">
-									<ion-option [value]="month" *ngFor="let month of months" [innerHTML]="month"></ion-option>
+									<ion-option [value]="month" *ngFor="let month of config.monthsList" [innerHTML]="month"></ion-option>
 								</ion-select>
 							</ion-item>
 						</ion-col>
@@ -42,7 +42,7 @@
 				</ion-col>
 			</ion-row>
 			<ion-row class="center">
-				<ion-col width-10 *ngFor="let week of weeks" [innerHTML]="week" class="font_bold"></ion-col>
+				<ion-col width-10 *ngFor="let week of config.weeksList" [innerHTML]="week" class="font_bold"></ion-col>
 			</ion-row>
 			<ion-row class="center" *ngFor="let row of rows">
 				<ion-col width-10 *ngFor="let col of cols">
@@ -55,19 +55,13 @@
 <ion-footer>
 	<ion-toolbar>
 		<ion-buttons start (click)="setDate()">
-			<button ion-button color="royal">
-        Set
-      </button>
+			<button ion-button color="royal" [innerHTML]="config.setLabel"></button>
 		</ion-buttons>
 		<ion-buttons center (click)="setToday()">
-			<button ion-button color="royal">
-        Today
-      </button>
+			<button ion-button color="royal" [innerHTML]="config.todayLabel"></button>
 		</ion-buttons>
 		<ion-buttons end (click)="dismiss()">
-			<button ion-button color="royal">
-        Close
-      </button>
+			<button ion-button color="royal" [innerHTML]="config.closeLabel"></button>
 		</ion-buttons>
 	</ion-toolbar>
 </ion-footer>
