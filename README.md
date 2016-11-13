@@ -21,3 +21,10 @@ This is an ionic-datepicker component, which can be used in any Ionic v2 framewo
 This will install the latest version of this plugin and also it will save the plugin name in package.json, as we are using `--save`. If you wish to install any specific version then
 
 `npm install ionic2-datepicker#0.1.0 --save`
+
+2) Specify the path of  `ionic2-datepicker.bundle.js` in your `index.html` file.
+
+````html
+<!-- path to ionic -->
+<script src="node_modules/ionic2-datepicker/dist/ionic2-datepicker.min.js"></script>
+````
