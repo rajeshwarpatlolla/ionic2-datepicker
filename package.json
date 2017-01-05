@@ -2,7 +2,7 @@
   "name": "ionic2-datepicker",
   "version": "0.1.0",
   "description": "A datepicker for ionic v2",
-  "main": "index.js",
+  "main": "ionic-datepicker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

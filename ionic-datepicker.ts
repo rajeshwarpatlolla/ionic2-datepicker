@@ -2,7 +2,118 @@ import { Component } from '@angular/core';
 import { ViewController, NavParams } from 'ionic-angular';
 
 @Component({
-  templateUrl: 'ionic-datepicker.html'
+  styles:[
+    `
+    .ionic_datepicker_modal_content {
+      ion-row {
+        padding: 4px;
+      }
+      ion-col {
+        text-align: center;
+        margin: auto;
+      }
+      .font_bold {
+        font-weight: bold;
+      } 
+      .label-md{
+        display: none;
+      }
+      ion-select{
+        max-width: 100%;
+        width: 100%;
+      }
+      .select-md {
+        padding: 5px;
+      }
+      .date_cell{
+        padding: 5px;
+      }
+      .disabled{
+        pointer-events: none;
+        color: #aaa;
+      }
+      .today{
+        border: 1px solid #387ef5;
+        border-radius: 2px;
+        color: #000;
+      }
+      .selected_date{
+        color: #fff;
+        font-weight: bold;
+        border-radius: 2px;
+        background-color: #387ef5;
+      }
+    }
+  `
+  ],
+  template: `
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          <!-- <span [innerHTML]="selectedDate"></span> -->
+          {{ selectedDate | date: config.dateFormat }}
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ionic_datepicker_modal_content">
+      <ion-list>
+        <ion-grid>
+          <ion-row class="center">
+            <ion-col width-10 (click)="prevMonth(daysList[daysList.length - 1])" [ngClass]="{disabled: (prevDisabled)}">
+              <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+            </ion-col>
+            <ion-col width-80>
+              <!--<span [innerHTML]="months[daysList[daysList.length - 1].month]"></span>
+              <span> - </span>
+              <span [innerHTML]="daysList[daysList.length - 1].year"></span>-->
+              <ion-row class="center">
+                <ion-col width-50>
+                  <ion-item>
+                    <ion-label>Month</ion-label>
+                    <ion-select [(ngModel)]="selectedMonth" (ionChange)="monthSelected($event,selectedMonth)">
+                      <ion-option [value]="month" *ngFor="let month of config.monthsList" [innerHTML]="month"></ion-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col width-50>
+                  <ion-item>
+                    <ion-label>Year</ion-label>
+                    <ion-select [(ngModel)]="selectedYear" (ionChange)="yearSelected($event,selectedYear)">
+                      <ion-option [value]="year" *ngFor="let year of years" [innerHTML]="year"></ion-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col width-10 (click)="nextMonth(daysList[daysList.length - 1])" [ngClass]="{disabled: (nextDisabled)}">
+              <ion-icon ios="ios-arrow-forward" md="md-arrow-forward"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row class="center">
+            <ion-col width-10 *ngFor="let week of config.weeksList" [innerHTML]="week" class="font_bold"></ion-col>
+          </ion-row>
+          <ion-row class="center" *ngFor="let row of rows">
+            <ion-col width-10 *ngFor="let col of cols">
+              <span *ngIf="daysList[row + col]" class="date_cell" [innerHTML]="daysList[row + col].date" (click)="dateClicked(daysList[row + col])" [ngClass]="{today: (today.getTime() == daysList[row + col].epoch), selected_date: (selectedDate.getTime() == daysList[row + col].epoch), disabled: (!daysList[row + col].enabled)}"></span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </ion-content>
+    <ion-footer>
+      <ion-toolbar>
+        <ion-buttons start (click)="setDate()">
+          <button ion-button color="royal" [innerHTML]="config.setLabel"></button>
+        </ion-buttons>
+        <ion-buttons center (click)="setToday()">
+          <button ion-button color="royal" [innerHTML]="config.todayLabel"></button>
+        </ion-buttons>
+        <ion-buttons end (click)="dismiss()">
+          <button ion-button color="royal" [innerHTML]="config.closeLabel"></button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-footer>
+  `
 })
 export class IonicDatepicker {
   weeks;
